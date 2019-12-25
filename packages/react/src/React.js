@@ -6,7 +6,7 @@
  */
 
 import ReactVersion from 'shared/ReactVersion';
-import {
+import { // symbols变量
   REACT_FRAGMENT_TYPE,
   REACT_PROFILER_TYPE,
   REACT_STRICT_MODE_TYPE,
@@ -15,6 +15,8 @@ import {
 } from 'shared/ReactSymbols';
 
 import {Component, PureComponent} from './ReactBaseClasses';
+// 创建一个能够通过 ref 属性附加到 React 元素的 ref。
+// eg: this.inputRef = createRef()  <input ref={this.inputRef}>
 import {createRef} from './ReactCreateRef';
 import {forEach, map, count, toArray, only} from './ReactChildren';
 import {
@@ -64,6 +66,7 @@ import {
   exposeConcurrentModeAPIs,
 } from 'shared/ReactFeatureFlags';
 const React = {
+  // 子集包含 map, forEach, count, toArray, only方法
   Children: {
     map,
     forEach,
@@ -72,16 +75,16 @@ const React = {
     only,
   },
 
-  createRef,
-  Component,
-  PureComponent,
+  createRef, // 创建dom
+  Component, // 组件
+  PureComponent, // 纯组件
 
-  createContext,
-  forwardRef,
-  lazy,
-  memo,
+  createContext, // 创建上下文
+  forwardRef, // 转发refs
+  lazy,      // 异步组件
+  memo,    // 类似于 PureComponent 用在函数组件中 提高性能
 
-  useCallback,
+  useCallback, // hook
   useContext,
   useEffect,
   useImperativeHandle,
@@ -92,22 +95,22 @@ const React = {
   useRef,
   useState,
 
-  Fragment: REACT_FRAGMENT_TYPE,
-  Profiler: REACT_PROFILER_TYPE,
-  StrictMode: REACT_STRICT_MODE_TYPE,
-  Suspense: REACT_SUSPENSE_TYPE,
+  Fragment: REACT_FRAGMENT_TYPE, // 节点片段，不是真实的DOM
+  Profiler: REACT_PROFILER_TYPE, // 测试组件的渲染性能
+  StrictMode: REACT_STRICT_MODE_TYPE, // 严格模式
+  Suspense: REACT_SUSPENSE_TYPE, // 让你的组件在渲染之前进行“等待”，并在等待时显示 fallback 的内容。
 
-  createElement: __DEV__ ? createElementWithValidation : createElement,
-  cloneElement: __DEV__ ? cloneElementWithValidation : cloneElement,
-  createFactory: __DEV__ ? createFactoryWithValidation : createFactory,
-  isValidElement: isValidElement,
+  createElement: __DEV__ ? createElementWithValidation : createElement, // 创建元素
+  cloneElement: __DEV__ ? cloneElementWithValidation : cloneElement, // 克隆元素
+  createFactory: __DEV__ ? createFactoryWithValidation : createFactory, // 生成指定类型的函数组件 已废弃
+  isValidElement: isValidElement, // 验证是否是一个 react 组件
 
-  version: ReactVersion,
+  version: ReactVersion, // react 的版本
 
   __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: ReactSharedInternals,
 };
 
-if (exposeConcurrentModeAPIs) {
+if (exposeConcurrentModeAPIs) { // 实验性的api
   React.useTransition = useTransition;
   React.useDeferredValue = useDeferredValue;
   React.SuspenseList = REACT_SUSPENSE_LIST_TYPE;
@@ -134,6 +137,7 @@ if (enableScopeAPI) {
 
 if (enableJSXTransformAPI) {
   if (__DEV__) {
+    // 开发模式带验证的
     React.jsxDEV = jsxWithValidation;
     React.jsx = jsxWithValidationDynamic;
     React.jsxs = jsxWithValidationStatic;
@@ -145,5 +149,4 @@ if (enableJSXTransformAPI) {
   }
 }
 
-debugger
 export default React;

@@ -4,12 +4,12 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import warningWithoutStack from 'shared/warningWithoutStack';
-
+// 定义一个即将更新的组件对象
 const didWarnStateUpdateForUnmountedComponent = {};
 
 function warnNoop(publicInstance, callerName) {
+  debugger
   if (__DEV__) {
     const constructor = publicInstance.constructor;
     const componentName =
@@ -35,6 +35,7 @@ function warnNoop(publicInstance, callerName) {
 /**
  * This is the abstract API for an update queue.
  */
+// 更新应用的队列对象
 const ReactNoopUpdateQueue = {
   /**
    * Checks whether or not this composite component is mounted.
@@ -43,6 +44,7 @@ const ReactNoopUpdateQueue = {
    * @protected
    * @final
    */
+  // 默认是否挂载
   isMounted: function(publicInstance) {
     return false;
   },
@@ -62,7 +64,9 @@ const ReactNoopUpdateQueue = {
    * @param {?string} callerName name of the calling function in the public API.
    * @internal
    */
+  // 强制更新
   enqueueForceUpdate: function(publicInstance, callback, callerName) {
+    debugger
     warnNoop(publicInstance, 'forceUpdate');
   },
 

@@ -21,7 +21,7 @@ const RESERVED_PROPS = {
 };
 
 let specialPropKeyWarningShown, specialPropRefWarningShown;
-
+// 判断是否有 ref这个属性
 function hasValidRef(config) {
   if (__DEV__) {
     if (hasOwnProperty.call(config, 'ref')) {
@@ -33,7 +33,7 @@ function hasValidRef(config) {
   }
   return config.ref !== undefined;
 }
-
+// 判断是否有key值
 function hasValidKey(config) {
   if (__DEV__) {
     if (hasOwnProperty.call(config, 'key')) {
@@ -45,7 +45,7 @@ function hasValidKey(config) {
   }
   return config.key !== undefined;
 }
-
+// 判断key是否重复或者是否为空
 function defineKeyPropWarningGetter(props, displayName) {
   const warnAboutAccessingKey = function() {
     if (!specialPropKeyWarningShown) {

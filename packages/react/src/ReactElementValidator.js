@@ -44,7 +44,7 @@ if (__DEV__) {
 }
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
-
+// 捕获警告
 function getDeclarationErrorAddendum() {
   if (ReactCurrentOwner.current) {
     const name = getComponentName(ReactCurrentOwner.current.type);
@@ -54,7 +54,7 @@ function getDeclarationErrorAddendum() {
   }
   return '';
 }
-
+// 捕获错误的行数
 function getSourceInfoErrorAddendum(source) {
   if (source !== undefined) {
     const fileName = source.fileName.replace(/^.*[\\\/]/, '');
@@ -79,6 +79,7 @@ function getSourceInfoErrorAddendumForProps(elementProps) {
 const ownerHasKeyUseWarning = {};
 
 function getCurrentComponentErrorInfo(parentType) {
+  // debugger
   let info = getDeclarationErrorAddendum();
 
   if (!info) {
@@ -104,12 +105,14 @@ function getCurrentComponentErrorInfo(parentType) {
  * @param {ReactElement} element Element that requires a key.
  * @param {*} parentType element's parent's type.
  */
+// 验证map中的key值
 function validateExplicitKey(element, parentType) {
+  // 如果没问题的key就直接返回
   if (!element._store || element._store.validated || element.key != null) {
     return;
   }
   element._store.validated = true;
-
+  // 父节点的警告
   const currentComponentErrorInfo = getCurrentComponentErrorInfo(parentType);
   if (ownerHasKeyUseWarning[currentComponentErrorInfo]) {
     return;

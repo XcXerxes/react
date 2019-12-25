@@ -12,7 +12,7 @@ import {
   REACT_ELEMENT_TYPE,
   REACT_PORTAL_TYPE,
 } from 'shared/ReactSymbols';
-
+// 验证是否是element
 import {isValidElement, cloneAndReplaceKey} from './ReactElement';
 import ReactDebugCurrentFrame from './ReactDebugCurrentFrame';
 
