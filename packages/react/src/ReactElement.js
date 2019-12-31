@@ -47,6 +47,7 @@ function hasValidKey(config) {
 }
 // 判断key是否重复或者是否为空
 function defineKeyPropWarningGetter(props, displayName) {
+  debugger
   const warnAboutAccessingKey = function() {
     if (!specialPropKeyWarningShown) {
       specialPropKeyWarningShown = true;

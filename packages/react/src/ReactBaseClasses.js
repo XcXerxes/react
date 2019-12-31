@@ -114,6 +114,7 @@ if (__DEV__) {
     ],
   };
   const defineDeprecationWarning = function(methodName, info) {
+    debugger
     Object.defineProperty(Component.prototype, methodName, {
       get: function() {
         debugger

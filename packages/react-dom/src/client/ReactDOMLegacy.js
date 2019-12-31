@@ -50,6 +50,7 @@ let warnedAboutHydrateAPI = false;
 
 if (__DEV__) {
   topLevelUpdateWarnings = (container: DOMContainer) => {
+    debugger
     if (container._reactRootContainer && container.nodeType !== COMMENT_NODE) {
       const hostInstance = findHostInstanceWithNoPortals(
         container._reactRootContainer._internalRoot.current,
@@ -66,6 +67,7 @@ if (__DEV__) {
     }
 
     const isRootRenderedBySomeReact = !!container._reactRootContainer;
+    // 根据传入的节点获取最上面的节点
     const rootEl = getReactRootElementInContainer(container);
     const hasNonRootReactChild = !!(rootEl && getInstanceFromNode(rootEl));
 
@@ -170,6 +172,7 @@ function legacyRenderSubtreeIntoContainer(
   callback: ?Function,
 ) {
   if (__DEV__) {
+    // 检测当前的节点是否是根节点
     topLevelUpdateWarnings(container);
     warnOnInvalidCallback(callback === undefined ? null : callback, 'render');
   }
@@ -273,17 +276,25 @@ export function hydrate(
     callback,
   );
 }
-
+// render 方法包含三个参数
+/**
+ * 
+ * @param {*node} element dom树 
+ * @param {*} container 根节点
+ * @param {*} callback 回调
+ */
 export function render(
   element: React$Element<any>,
   container: DOMContainer,
   callback: ?Function,
 ) {
+  debugger
   invariant(
     isValidContainer(container),
     'Target container is not a DOM element.',
   );
   if (__DEV__) {
+    // 判断container 是否是根节点
     const isModernRoot =
       isContainerMarkedAsRoot(container) &&
       container._reactRootContainer === undefined;
